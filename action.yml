@@ -1,0 +1,11 @@
+name: 'AWS Go CDK'
+description: 'Run CDK commands.'
+inputs:
+  command:
+    description: 'CDK command'
+    default: 'cdk deploy'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
