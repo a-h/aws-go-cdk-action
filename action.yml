@@ -3,7 +3,7 @@ description: 'Run CDK commands.'
 inputs:
   command:
     description: 'CDK command'
-    default: 'cdk deploy'
+    default: 'cdk deploy --app'
 runs:
   using: 'docker'
   image: 'Dockerfile'
