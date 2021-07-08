@@ -2,7 +2,7 @@
 
 echo "Executing command..."
 sh -c "$*"
-exit_code = $?
+exit_code=$?
 
 echo "Done."
 exit $exit_code
