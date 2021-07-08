@@ -3,7 +3,7 @@ description: 'Run CDK commands.'
 inputs:
   command:
     description: 'Command'
-    default: 'cdk deploy'
+    default: 'cdk deploy --require-approval never'
 runs:
   using: 'docker'
   image: 'Dockerfile'
