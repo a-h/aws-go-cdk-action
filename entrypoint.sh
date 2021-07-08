@@ -7,7 +7,7 @@ find . -type f -name "*main.go" | xargs --no-run-if-empty dirname | awk '{print 
 
 # Execute cdk commands.
 echo "Executing CDK command..."
-$1
+sh -c "$*"
 
 # Say complete.
 echo "Done."
