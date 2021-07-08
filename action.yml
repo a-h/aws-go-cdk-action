@@ -2,7 +2,7 @@ name: 'AWS Go CDK'
 description: 'Run CDK commands.'
 inputs:
   command:
-    description: 'CDK command'
+    description: 'Command'
     default: 'cdk deploy'
 runs:
   using: 'docker'
