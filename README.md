@@ -2,6 +2,8 @@
 
 This action runs CDK deploy for Go projects.
 
+The Docker image is also deployed to Github Docker registry.
+
 ## Inputs
 
 ## `command`
