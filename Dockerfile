@@ -1,7 +1,7 @@
 FROM node:latest
 
 # Install CDK.
-RUN npm install -g aws-cdk
+RUN npm install -g aws-cdk@1.125.0
 
 # Install Go.
 RUN curl -L -o go1.16.6.linux-amd64.tar.gz https://golang.org/dl/go1.16.6.linux-amd64.tar.gz 
