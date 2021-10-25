@@ -7,6 +7,7 @@ RUN npm install -g aws-cdk@1.125.0 typescript
 RUN curl -L -o go1.17.2.linux-amd64.tar.gz https://golang.org/dl/go1.17.2.linux-amd64.tar.gz 
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.2.linux-amd64.tar.gz
 ENV PATH "$PATH:/usr/local/go/bin"
+ENV PATH "$PATH:/root/go/bin"
 
 # Install pact.
 RUN curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.88.66/pact-1.88.66-linux-x86_64.tar.gz
