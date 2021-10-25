@@ -21,5 +21,8 @@ RUN echo \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 
+# Install eXeCute
+RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.15
+
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
