@@ -1,11 +1,11 @@
 FROM node:latest
 
 # Install CDK.
-RUN npm install -g aws-cdk
+RUN npm install -g aws-cdk@1.125.0 typescript
 
 # Install Go.
-RUN curl -L -o go1.16.6.linux-amd64.tar.gz https://golang.org/dl/go1.16.6.linux-amd64.tar.gz 
-RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.6.linux-amd64.tar.gz
+RUN curl -L -o go1.17.2.linux-amd64.tar.gz https://golang.org/dl/go1.17.2.linux-amd64.tar.gz 
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.2.linux-amd64.tar.gz
 ENV PATH "$PATH:/usr/local/go/bin"
 
 # Install pact.
