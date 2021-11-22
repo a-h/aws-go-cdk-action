@@ -1,7 +1,7 @@
 FROM node:latest
 
 # Install CDK.
-RUN npm install -g aws-cdk@1.125.0 typescript
+RUN npm install -g aws-cdk@1.133.0 typescript
 
 # Install Go.
 RUN curl -L -o go1.17.2.linux-amd64.tar.gz https://golang.org/dl/go1.17.2.linux-amd64.tar.gz 
