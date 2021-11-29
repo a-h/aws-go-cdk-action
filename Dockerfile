@@ -23,7 +23,11 @@ RUN echo \
 RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # Install eXeCute
-RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.44
+RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.45
+
+# Install gosec and staticcheck.
+RUN go install github.com/securego/gosec/v2/cmd/gosec@latest
+RUN go install honnef.co/go/tools/cmd/staticcheck@latest
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
