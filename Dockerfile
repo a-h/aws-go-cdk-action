@@ -9,5 +9,21 @@ RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.2.linux-amd64.tar.gz
 ENV PATH "$PATH:/usr/local/go/bin"
 ENV PATH "$PATH:/root/go/bin"
 
+# Install Docker.
+RUN apt-get update && apt-get install -y apt-transport-https ca-certificates gnupg lsb-release
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+RUN echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# Install eXeCute
+RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.45
+
+# Install gosec and staticcheck.
+RUN go install github.com/securego/gosec/v2/cmd/gosec@latest
+RUN go install honnef.co/go/tools/cmd/staticcheck@latest
+
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+
