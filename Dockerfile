@@ -29,5 +29,8 @@ RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.45
 RUN go install github.com/securego/gosec/v2/cmd/gosec@latest
 RUN go install honnef.co/go/tools/cmd/staticcheck@latest
 
+# Install templ.
+RUN go install github.com/a-h/templ/cmd/templ@latest
+
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
