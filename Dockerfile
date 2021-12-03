@@ -32,5 +32,10 @@ RUN go install honnef.co/go/tools/cmd/staticcheck@latest
 # Install templ.
 RUN go install github.com/a-h/templ/cmd/templ@latest
 
+# Install wkhtmltopdf
+RUN apt-get install -y xfonts-75dpi xfonts-base && \
+   wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb && \
+   dpkg --install wkhtmltox_0.12.6-1.buster_amd64.deb
+
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
