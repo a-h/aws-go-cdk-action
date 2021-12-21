@@ -25,6 +25,14 @@ RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 ## Install jq
 RUN apt-get update && apt-get install -y jq
 
+## Instal AWS CLI
+
+RUN mkdir -p /tmp/aws \
+    && cd /tmp/aws \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install
+
 # Install eXeCute
 RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.45
 
