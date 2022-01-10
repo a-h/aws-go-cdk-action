@@ -33,6 +33,9 @@ RUN mkdir -p /tmp/aws \
 # Install eXeCute
 RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.45
 
+# Install gdiv
+RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@latest
+
 # Install gosec and staticcheck.
 RUN go install github.com/securego/gosec/v2/cmd/gosec@latest
 RUN go install honnef.co/go/tools/cmd/staticcheck@latest
