@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:16
 
 # Install CDK.
 RUN npm install -g aws-cdk@1.138.2 typescript
