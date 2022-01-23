@@ -34,7 +34,7 @@ RUN mkdir -p /tmp/aws \
 RUN go install github.com/joe-davidson1802/xc/cmd/xc@v0.0.45
 
 # Install gdiv
-RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@v0.0.8
+RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@v0.0.9
 
 # Install gosec and staticcheck.
 RUN go install github.com/securego/gosec/v2/cmd/gosec@latest
