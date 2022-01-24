@@ -1,4 +1,5 @@
-FROM node:16
+FROM node:16 
+# Based on Debian BUSTER
 
 # Install CDK.
 RUN npm install -g aws-cdk@1.138.2 typescript
@@ -47,6 +48,11 @@ RUN go install github.com/a-h/templ/cmd/templ@latest
 RUN apt-get install -y xfonts-75dpi xfonts-base && \
    wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb && \
    dpkg --install wkhtmltox_0.12.6-1.buster_amd64.deb
+
+# JQ
+RUN apt update \
+  && apt-get install -y jq \
+  && apt-get clean
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
