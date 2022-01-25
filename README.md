@@ -26,7 +26,7 @@ env:
 ### build
 
 ```sh
-docker build -t aws-go-cdk-action:latest .
+docker build --progress=plain -t aws-go-cdk-action:latest .
 ```
 
 ### run
