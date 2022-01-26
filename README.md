@@ -21,3 +21,10 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
 
+## Tasks
+
+### build
+
+```
+docker build -t a-h/aws-go-cdk-action .
+```
