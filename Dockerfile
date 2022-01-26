@@ -22,9 +22,6 @@ FROM node:16
 
 COPY --from=downloads /downloads /downloads
 
-# Update.
-RUN apt-get update 
-
 # Install CDK.
 RUN npm install -g aws-cdk@1.138.2 typescript
 
@@ -33,12 +30,17 @@ RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go1.17.5.linux-amd
 ENV PATH "$PATH:/usr/local/go/bin"
 ENV PATH "$PATH:/root/go/bin"
 
+# Update.
+RUN apt-get update
+
 # Install Docker.
-RUN apt-get install -y ca-certificates gnupg lsb-release
+RUN apt-get install -y apt-transport-https ca-certificates gnupg lsb-release
 RUN cat /downloads/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 RUN echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Need to update again after updating the key ring.
+RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 
 ## Install AWS CLI.
 RUN mkdir -p /tmp && \
