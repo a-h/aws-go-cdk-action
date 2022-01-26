@@ -6,7 +6,7 @@ RUN apk add curl
 # https://explainshell.com/explain?cmd=curl+-fsSLO+example.org
 WORKDIR /downloads
 RUN curl -fsSLO https://download.docker.com/linux/debian/gpg
-RUN curl -fsSLO https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+RUN curl -fsSLO https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.14.zip
 RUN curl -fsSLO https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
 RUN curl -fsSLO https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
 RUN curl -fsSLO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.88.66/pact-1.88.66-linux-x86_64.tar.gz
@@ -48,7 +48,7 @@ RUN echo \
 
 ## Install AWS CLI.
 RUN mkdir -p /tmp && \
-    unzip /downloads/awscli-exe-linux-x86_64.zip -d /tmp && \
+    unzip /downloads/awscli-exe-linux-x86_64-2.4.14.zip -d /tmp && \
     ./tmp/aws/install && \
     rm -rf /tmp/aws
 
