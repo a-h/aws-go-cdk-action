@@ -59,6 +59,8 @@ RUN go install github.com/joe-davidson1802/xc/cmd/xc@f8fb0eaab75ef7254a927dc7749
 
 # Install gdiv
 RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@c4a3eae7ff9d90f78eb91665d9bbd7dc57c49fe1
+# Install gogit
+RUN go install github.com/joe-davidson1802/gogit/cmd/gdiv@48edb86e596955b59b5af348f64ae874846162e6
 
 # Install gosec and staticcheck.
 RUN go install github.com/securego/gosec/v2/cmd/gosec@1d909e2687abe43eaa81af88d6efde3d20c8d481
