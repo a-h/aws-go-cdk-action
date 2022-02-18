@@ -58,7 +58,7 @@ RUN mkdir -p /tmp && \
 RUN go install github.com/joe-davidson1802/xc/cmd/xc@f8fb0eaab75ef7254a927dc7749f7aac0cae82ad
 
 # Install gdiv
-RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@c4a3eae7ff9d90f78eb91665d9bbd7dc57c49fe1
+RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@8120eae9ea337860865d18d7cea149dfb79a4ff8
 
 # Install gogit
 RUN go install github.com/joe-davidson1802/gogit/cmd/gogit@1c1b0ba9b0735f646ef833a746329fb03169c656
