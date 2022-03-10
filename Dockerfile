@@ -55,13 +55,13 @@ RUN mkdir -p /tmp && \
     rm -rf /tmp/aws
 
 # Install eXeCute
-RUN go install github.com/joe-davidson1802/xc/cmd/xc@f8fb0eaab75ef7254a927dc7749f7aac0cae82ad
+RUN go install github.com/joerdav/xc/cmd/xc@969a361e3f8c221ba409506dea3e9629a8371670
 
 # Install gdiv
-RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@8120eae9ea337860865d18d7cea149dfb79a4ff8
+RUN go install github.com/joerdav/gdiv/cmd/gdiv@1ce83542a735a7815d712ed7165e8e4b60a46f77
 
 # Install gogit
-RUN go install github.com/joe-davidson1802/gogit/cmd/gogit@1c1b0ba9b0735f646ef833a746329fb03169c656
+RUN go install github.com/joerdav/gogit/cmd/gogit@4d714937e5dbcc8d6bfe7ba02a46bd3d2d61b6a8
 
 # Install gosec and staticcheck.
 RUN go install github.com/securego/gosec/v2/cmd/gosec@1d909e2687abe43eaa81af88d6efde3d20c8d481
