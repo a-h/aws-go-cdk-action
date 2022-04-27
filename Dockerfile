@@ -23,7 +23,7 @@ FROM node:16
 COPY --from=downloads /downloads /downloads
 
 # Install CDK.
-RUN npm install -g aws-cdk@1.138.2 typescript
+RUN npm install -g aws-cdk@2.21.1 typescript
 
 # Install Go.
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go1.17.5.linux-amd64.tar.gz
