@@ -66,6 +66,7 @@ RUN go install github.com/joerdav/gogit/cmd/gogit@4d714937e5dbcc8d6bfe7ba02a46bd
 # Install gosec and staticcheck.
 RUN go install github.com/securego/gosec/v2/cmd/gosec@1d909e2687abe43eaa81af88d6efde3d20c8d481
 RUN go install honnef.co/go/tools/cmd/staticcheck@c8caa92bad8c27ae734c6725b8a04932d54a147b
+RUN go install github.com/golangci/golangci-lint/cmd/golangci-lint@a3336890904cd3efa4f1c7e3f82ce207fe125a6f
 
 # Install templ.
 RUN go install github.com/a-h/templ/cmd/templ@220fc807ae592143116582cc13d61cd989ccb9e1
