@@ -1,4 +1,4 @@
-FROM alpine:latest AS downloads
+FROM --platform=linux/amd64 alpine:latest as downloads
 
 # Install curl.
 RUN apk add curl
@@ -6,8 +6,8 @@ RUN apk add curl
 # https://explainshell.com/explain?cmd=curl+-fsSLO+example.org
 WORKDIR /downloads
 RUN curl -fsSLO https://download.docker.com/linux/debian/gpg
-RUN curl -fsSLO https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.14.zip
-RUN curl -fsSLO https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
+RUN curl -fsSL -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.14.zip
+RUN curl -fsSL -o go.tar.gz https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
 
 # Create a sum of all files.
 RUN find . -type f -exec sha256sum {} \; >> /downloads/current_hashes.txt
@@ -17,16 +17,17 @@ RUN cat /downloads/current_hashes.txt
 COPY past_hashes.txt /downloads
 RUN sha256sum -c past_hashes.txt
 
-FROM node:16 
+FROM --platform=linux/amd64 node:16
+
 # Based on Debian buster.
 
 COPY --from=downloads /downloads /downloads
 
 # Install CDK.
-RUN npm install -g aws-cdk@2.21.1 typescript
+RUN npm install -g aws-cdk@2.29.1 typescript
 
 # Install Go.
-RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go1.17.5.linux-amd64.tar.gz
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go.tar.gz
 ENV PATH "$PATH:/usr/local/go/bin"
 ENV PATH "$PATH:/root/go/bin"
 
@@ -44,12 +45,12 @@ RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 
 ## Install AWS CLI.
 RUN mkdir -p /tmp && \
-    unzip /downloads/awscli-exe-linux-x86_64-2.4.14.zip -d /tmp && \
+    unzip /downloads/awscli.zip -d /tmp && \
     ./tmp/aws/install && \
     rm -rf /tmp/aws
 
 # Install eXeCute.
-RUN go install github.com/joe-davidson1802/xc/cmd/xc@f8fb0eaab75ef7254a927dc7749f7aac0cae82ad
+RUN go install github.com/joerdav/xc/cmd/xc@1fa51af1d295c716d51d551348d8948e21330d72
 
 # Install gdiv.
 RUN go install github.com/joe-davidson1802/gdiv/cmd/gdiv@c4a3eae7ff9d90f78eb91665d9bbd7dc57c49fe1

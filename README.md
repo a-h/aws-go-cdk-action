@@ -26,5 +26,5 @@ env:
 ### build
 
 ```
-docker build -t a-h/aws-go-cdk-action .
+docker build --progress=plain -t a-h/aws-go-cdk-action .
 ```
