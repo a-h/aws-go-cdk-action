@@ -28,3 +28,24 @@ env:
 ```
 docker build --progress=plain -t a-h/aws-go-cdk-action .
 ```
+
+### setup-buildx
+
+See https://cloudolife.com/2022/03/05/Infrastructure-as-Code-IaC/Container/Docker/Docker-buildx-support-multiple-architectures-images/ for information about building cross-platform images.
+
+```
+docker buildx create --name cross-platform
+docker buildx use cross-platform
+```
+
+### build-cross-platform
+
+```
+docker buildx build -t ghcr.io/a-h/aws-go-cdk-action:latest --progress=plain --platform=linux/arm64,linux/amd64 .
+```
+
+### push-cross-platform
+
+```
+docker buildx build -t ghcr.io/a-h/aws-go-cdk-action:latest --progress=plain --push --platform=linux/arm64,linux/amd64 .
+```
