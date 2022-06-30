@@ -6,10 +6,12 @@ RUN apk add curl
 # https://explainshell.com/explain?cmd=curl+-fsSLO+example.org
 WORKDIR /downloads
 RUN curl -fsSLO https://download.docker.com/linux/debian/gpg
-RUN curl -fsSLO https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.14.zip
-RUN curl -fsSLO https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
-RUN curl -fsSLO https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
-RUN curl -fsSLO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.88.66/pact-1.88.66-linux-x86_64.tar.gz
+RUN curl -fsSL -o awscli_amd64.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.7.12.zip
+RUN curl -fsSL -o awscli_arm64.zip https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.7.12.zip
+RUN curl -fsSL -o go_amd64.tar.gz "https://go.dev/dl/go1.18.3.linux-amd64.tar.gz"
+RUN curl -fsSL -o go_arm64.tar.gz "https://go.dev/dl/go1.18.3.linux-arm64.tar.gz"
+RUN curl -fsSL -o wkhtmltox_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
+RUN curl -fsSL -o wkhtmltox_arm64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_arm64.deb
 
 # Create a sum of all files.
 RUN find . -type f -exec sha256sum {} \; >> /downloads/current_hashes.txt
@@ -24,17 +26,18 @@ FROM node:16
 
 COPY --from=downloads /downloads /downloads
 
+# Use the specific architectures.
+RUN mv "/downloads/awscli_$(dpkg --print-architecture).zip" /downloads/awscli.zip
+RUN mv "/downloads/go_$(dpkg --print-architecture).tar.gz" /downloads/go.tar.gz
+RUN mv "/downloads/wkhtmltox_$(dpkg --print-architecture).deb" /downloads/wkhtmltox.deb
+
 # Install CDK.
-RUN npm install -g aws-cdk@2.25.0 typescript
+RUN npm install -g aws-cdk@2.29.1 typescript
 
 # Install Go.
-RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go1.17.5.linux-amd64.tar.gz
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go.tar.gz
 ENV PATH "$PATH:/usr/local/go/bin"
 ENV PATH "$PATH:/root/go/bin"
-
-# Install pact.
-RUN rm -rf /usr/local/pact && tar -C /usr/local -xzf /downloads/pact-1.88.66-linux-x86_64.tar.gz
-ENV PATH "$PATH:/usr/local/pact/bin"
 
 # Update.
 RUN apt-get update 
@@ -50,7 +53,7 @@ RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 
 ## Install AWS CLI.
 RUN mkdir -p /tmp && \
-    unzip /downloads/awscli-exe-linux-x86_64-2.4.14.zip -d /tmp && \
+    unzip /downloads/awscli.zip -d /tmp && \
     ./tmp/aws/install && \
     rm -rf /tmp/aws
 
@@ -73,7 +76,7 @@ RUN go install github.com/a-h/templ/cmd/templ@220fc807ae592143116582cc13d61cd989
 
 # Install wkhtmltopdf
 RUN apt-get install -y xfonts-75dpi xfonts-base && \
-  dpkg --install /downloads/wkhtmltox_0.12.6-1.buster_amd64.deb
+  dpkg --install /downloads/wkhtmltox.deb
 
 # JQ.
 RUN apt-get install -y jq
