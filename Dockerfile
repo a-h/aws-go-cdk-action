@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 alpine:latest as downloads
+FROM alpine:latest as downloads
 
 # Install curl.
 RUN apk add curl
@@ -6,8 +6,10 @@ RUN apk add curl
 # https://explainshell.com/explain?cmd=curl+-fsSLO+example.org
 WORKDIR /downloads
 RUN curl -fsSLO https://download.docker.com/linux/debian/gpg
-RUN curl -fsSL -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.14.zip
-RUN curl -fsSL -o go.tar.gz https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
+RUN curl -fsSL -o awscli_amd64.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.7.12.zip
+RUN curl -fsSL -o awscli_arm64.zip https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.7.12.zip
+RUN curl -fsSL -o go_amd64.tar.gz "https://go.dev/dl/go1.18.3.linux-amd64.tar.gz"
+RUN curl -fsSL -o go_arm64.tar.gz "https://go.dev/dl/go1.18.3.linux-arm64.tar.gz"
 
 # Create a sum of all files.
 RUN find . -type f -exec sha256sum {} \; >> /downloads/current_hashes.txt
@@ -17,11 +19,15 @@ RUN cat /downloads/current_hashes.txt
 COPY past_hashes.txt /downloads
 RUN sha256sum -c past_hashes.txt
 
-FROM --platform=linux/amd64 node:16
+FROM node:16
 
 # Based on Debian buster.
 
 COPY --from=downloads /downloads /downloads
+
+# Use the specific architectures.
+RUN mv "/downloads/awscli_$(dpkg --print-architecture).zip" /downloads/awscli.zip
+RUN mv "/downloads/go_$(dpkg --print-architecture).tar.gz" /downloads/go.tar.gz
 
 # Install CDK.
 RUN npm install -g aws-cdk@2.29.1 typescript
