@@ -20,7 +20,6 @@ COPY past_hashes.txt /downloads
 RUN sha256sum -c past_hashes.txt
 
 FROM node:16
-
 # Based on Debian buster.
 
 COPY --from=downloads /downloads /downloads
@@ -28,6 +27,12 @@ COPY --from=downloads /downloads /downloads
 # Use the specific architectures.
 RUN mv "/downloads/awscli_$(dpkg --print-architecture).zip" /downloads/awscli.zip
 RUN mv "/downloads/go_$(dpkg --print-architecture).tar.gz" /downloads/go.tar.gz
+
+# https://github.com/actions/runner/issues/691
+# https://stackoverflow.com/questions/67748017/how-to-use-github-actions-checkoutv2-inside-own-docker-container
+RUN groupadd -g 121 docker
+RUN useradd -g docker runner
+RUN usermod -a -G sudo runner
 
 # Install CDK.
 RUN npm install -g aws-cdk@2.32.1 typescript
