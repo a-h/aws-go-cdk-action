@@ -31,8 +31,14 @@ RUN mv "/downloads/awscli_$(dpkg --print-architecture).zip" /downloads/awscli.zi
 RUN mv "/downloads/go_$(dpkg --print-architecture).tar.gz" /downloads/go.tar.gz
 RUN mv "/downloads/wkhtmltox_$(dpkg --print-architecture).deb" /downloads/wkhtmltox.deb
 
+# https://github.com/actions/runner/issues/691
+# https://stackoverflow.com/questions/67748017/how-to-use-github-actions-checkoutv2-inside-own-docker-container
+RUN groupadd -g 121 docker
+RUN useradd -g docker runner
+RUN usermod -a -G sudo runner
+
 # Install CDK.
-RUN npm install -g aws-cdk@2.29.1 typescript
+RUN npm install -g aws-cdk@2.32.1 typescript
 
 # Install Go.
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go.tar.gz
