@@ -30,7 +30,7 @@ RUN mv "/downloads/awscli_$(dpkg --print-architecture).zip" /downloads/awscli.zi
 RUN mv "/downloads/go_$(dpkg --print-architecture).tar.gz" /downloads/go.tar.gz
 
 # Install CDK.
-RUN npm install -g aws-cdk@2.29.1 typescript
+RUN npm install -g aws-cdk@2.32.1 typescript
 
 # Install Go.
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go.tar.gz
