@@ -38,7 +38,7 @@ RUN useradd -g docker runner
 RUN usermod -a -G sudo runner
 
 # Install CDK.
-RUN npm install -g aws-cdk@2.32.1 typescript
+RUN npm install -g aws-cdk@2.40.0 typescript
 
 # Install Go.
 RUN rm -rf /usr/local/go && tar -C /usr/local -xzf /downloads/go.tar.gz
