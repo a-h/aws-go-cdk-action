@@ -78,7 +78,7 @@ RUN go install honnef.co/go/tools/cmd/staticcheck@7586196b2bb05a248f1934d8087c75
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.49.0
 
 # Install templ.
-RUN go install github.com/a-h/templ/cmd/templ@220fc807ae592143116582cc13d61cd989ccb9e1
+RUN go install github.com/a-h/templ/cmd/templ@1c6c2c9c3a5d354a026789da34405f900d5e44b5
 
 # Install wkhtmltopdf
 RUN apt-get install -y xfonts-75dpi xfonts-base && \
