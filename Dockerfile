@@ -88,7 +88,11 @@ RUN apt-get install -y xfonts-75dpi xfonts-base && \
 RUN apt-get install -y jq
 
 # Git
-RUN apt-get install -y git=2.35.2
+RUN apt-get install -y git
+
+# Workaround for https://github.com/golang/go/issues/51253,https://github.com/actions/checkout/issues/760, to allow all repos to build
+# The CVE isn't relevant to our github actions runners
+# RUN git config --global --add safe.directory "__w/*/*"
 
 # Clean up after any installs.
 RUN apt-get clean
