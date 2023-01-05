@@ -87,6 +87,9 @@ RUN apt-get install -y xfonts-75dpi xfonts-base && \
 # JQ.
 RUN apt-get install -y jq
 
+# Git
+RUN apg-get install -y git=2.35.2
+
 # Clean up after any installs.
 RUN apt-get clean
 
