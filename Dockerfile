@@ -36,8 +36,9 @@ RUN mv "/downloads/wkhtmltox_$(dpkg --print-architecture).deb" /downloads/wkhtml
 RUN groupadd -g 121 docker
 RUN useradd -g docker runner
 RUN usermod -a -G sudo runner
-RUN mkdir /home/runner
-RUN echo "[safe]\n\tdirectory = *" >> /home/runner/.gitconfig
+# RUN echo "[safe]\n\tdirectory = *" >> /home/runner/.gitconfig
+RUN mkdir -p /home/runner
+RUN chown runner /home/runner
 
 # Install CDK.
 RUN npm install -g aws-cdk@2.59.0 typescript
@@ -94,7 +95,10 @@ RUN apt-get install -y git
 
 # Workaround for https://github.com/golang/go/issues/51253,https://github.com/actions/checkout/issues/760, to allow all repos to build
 # The CVE isn't relevant to our github actions runners
-RUN git config --global --add safe.directory "__w/*/*"
+USER runner
+RUN whoami
+RUN git config --global --add safe.directory '*'
+USER root
 
 # Clean up after any installs.
 RUN apt-get clean
