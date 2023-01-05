@@ -36,6 +36,8 @@ RUN mv "/downloads/wkhtmltox_$(dpkg --print-architecture).deb" /downloads/wkhtml
 RUN groupadd -g 121 docker
 RUN useradd -g docker runner
 RUN usermod -a -G sudo runner
+RUN mkdir /home/runner
+RUN echo "[safe]\n\tdirectory = *" >> /home/runner/.gitconfig
 
 # Install CDK.
 RUN npm install -g aws-cdk@2.59.0 typescript
