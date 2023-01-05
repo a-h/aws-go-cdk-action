@@ -92,7 +92,7 @@ RUN apt-get install -y git
 
 # Workaround for https://github.com/golang/go/issues/51253,https://github.com/actions/checkout/issues/760, to allow all repos to build
 # The CVE isn't relevant to our github actions runners
-# RUN git config --global --add safe.directory "__w/*/*"
+RUN git config --global --add safe.directory "__w/*/*"
 
 # Clean up after any installs.
 RUN apt-get clean
