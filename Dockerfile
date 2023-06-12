@@ -74,9 +74,9 @@ RUN go install github.com/joerdav/gdiv/cmd/gdiv@1ce83542a735a7815d712ed7165e8e4b
 RUN go install github.com/joerdav/gogit/cmd/gogit@4d714937e5dbcc8d6bfe7ba02a46bd3d2d61b6a8
 
 # Install gosec and staticcheck.
-RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.12.0
-RUN go install honnef.co/go/tools/cmd/staticcheck@7586196b2bb05a248f1934d8087c759d05910e60
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.49.0
+RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.16.0
+RUN go install honnef.co/go/tools/cmd/staticcheck@v0.4.3
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.53.2
 
 # Install templ.
 RUN go install github.com/a-h/templ/cmd/templ@1c6c2c9c3a5d354a026789da34405f900d5e44b5
