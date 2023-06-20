@@ -65,7 +65,7 @@ RUN mkdir -p /tmp && \
     rm -rf /tmp/aws
 
 # Install eXeCute
-RUN go install github.com/joerdav/xc/cmd/xc@4c98d1037eddd4e36cf5d42a369b203589d02d84
+RUN go install github.com/joerdav/xc/cmd/xc@72f8c2aa4fb993b436c9297590f613ed2f24513f
 
 # Install gdiv
 RUN go install github.com/joerdav/gdiv/cmd/gdiv@1ce83542a735a7815d712ed7165e8e4b60a46f77
