@@ -21,7 +21,7 @@ RUN cat /downloads/current_hashes.txt
 COPY past_hashes.txt /downloads
 RUN sha256sum -c past_hashes.txt
 
-FROM node:20 
+FROM node:16 
 # Based on Debian buster.
 
 COPY --from=downloads /downloads /downloads
