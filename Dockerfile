@@ -10,8 +10,8 @@ RUN curl -fsSL -o awscli_amd64.zip https://awscli.amazonaws.com/awscli-exe-linux
 RUN curl -fsSL -o awscli_arm64.zip https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.9.12.zip
 RUN curl -fsSL -o go_amd64.tar.gz "https://go.dev/dl/go1.19.4.linux-amd64.tar.gz"
 RUN curl -fsSL -o go_arm64.tar.gz "https://go.dev/dl/go1.19.4.linux-arm64.tar.gz"
-RUN curl -fsSL -o wkhtmltox_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
-RUN curl -fsSL -o wkhtmltox_arm64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_arm64.deb
+RUN curl -fsSL -o wkhtmltox_amd64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb
+RUN curl -fsSL -o wkhtmltox_arm64.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_arm64.deb
 
 # Create a sum of all files.
 RUN find . -type f -exec sha256sum {} \; >> /downloads/current_hashes.txt
@@ -21,8 +21,8 @@ RUN cat /downloads/current_hashes.txt
 COPY past_hashes.txt /downloads
 RUN sha256sum -c past_hashes.txt
 
-FROM node:16 
-# Based on Debian buster.
+FROM node:20 
+# Based on Debian bookworm.
 
 COPY --from=downloads /downloads /downloads
 
