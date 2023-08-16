@@ -1,5 +1,5 @@
-d2929792fdc95fa66d637ecbf9cd0dce874f53d783d5ddcf947a86c007c81c95  ./wkhtmltox_arm64.deb
-3e7a93a2ae4a2dd5cccb1b7bcce0eb462c75f05efa314a29499dadfdc5ebc59e  ./wkhtmltox_amd64.deb
+b6606157b27c13e044d0abbe670301f88de4e1782afca4f9c06a5817f3e03a9c  ./wkhtmltox_arm64.deb
+98ba0d157b50d36f23bd0dedf4c0aa28c7b0c50fcdcdc54aa5b6bbba81a3941d  ./wkhtmltox_amd64.deb
 9df122d6baf6f2275270306b92af3b09d7973fb1259257e284dba33c0db14f1b  ./go_arm64.tar.gz
 c9c08f783325c4cf840a94333159cc937f05f75d36a8b307951d5bd959cf2ab8  ./go_amd64.tar.gz
 da11175e84e58a35abf39693f2f2b1e04ff2c941287cc6ebb3819c4dcfa8135e  ./awscli_arm64.zip
