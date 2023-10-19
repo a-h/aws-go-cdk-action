@@ -76,7 +76,7 @@ RUN go install github.com/joerdav/gogit/cmd/gogit@4d714937e5dbcc8d6bfe7ba02a46bd
 # Install gosec and staticcheck.
 RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s v2.16.0
 RUN go install honnef.co/go/tools/cmd/staticcheck@v0.4.6
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.53.2
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.54.2
 
 # Install templ.
 RUN go install github.com/a-h/templ/cmd/templ@1c6c2c9c3a5d354a026789da34405f900d5e44b5
