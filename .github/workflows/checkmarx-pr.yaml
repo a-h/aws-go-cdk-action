@@ -1,0 +1,19 @@
+name: Checkmarx Incremental Scan
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+concurrency:
+  group: "${{ github.repository }} @ ${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+
+jobs:
+  scan:
+    uses: aviva-verde/infrastructure-cicd/.github/workflows/checkmarx.yaml@main
+    with:
+      PROJECT_NAME: aws-go-cdk-action
+      FULL_SCAN: false
+    secrets:
+      CX_CLIENT_ID: ${{ secrets.CX_CLIENT_ID }}
+      CX_CLIENT_SECRET: ${{ secrets.CX_CLIENT_SECRET }}
